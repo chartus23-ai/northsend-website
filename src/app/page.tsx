@@ -7,25 +7,138 @@ import {
   IconChevronDown,
   IconPlay,
 } from "@/components/icons";
-import { FlowChart } from "@/components/FlowChart";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import {
-  painPoints,
-  benefits,
-  systems,
   process,
   deliverables,
-  faqs,
   about,
   hero,
   closer,
 } from "@/lib/content";
 
+/* v2-specific: AI follow-up repositioned as a conditional layer, not
+   a universal default. Card #3 body copy acknowledges the conditionality
+   subtly — we still keep AI follow-up in the system narrative for
+   prospects who need it, but we no longer pretend every clinic gets it. */
+const v2Systems = [
+  {
+    n: "01",
+    title: "Ad system",
+    body:
+      "Meta + Google ads built specifically for clinics. Geo-targeted to a 30-minute drive radius around your practice. Creative refreshed weekly.",
+  },
+  {
+    n: "02",
+    title: "Funnel system",
+    body:
+      "High-converting landing page tuned to your specialty. Educates, qualifies, and books, without your team lifting a finger.",
+  },
+  {
+    n: "03",
+    title: "AI follow-up layer",
+    body:
+      "n8n + AI automations that text, call, and re-engage every lead in under 5 minutes. Layered in when your current follow-up speed can't hit the math. Books the ready, nurtures the not-yet-ready.",
+  },
+  {
+    n: "04",
+    title: "Reporting + ownership",
+    body:
+      "Weekly performance dashboards. Full asset handover: ads, funnel, automations, data. You own everything we build.",
+  },
+];
+
+/* v2-specific: adds the "Do I have to use your AI follow-up?" answer
+   at position #4, after the "what if I already have X" objection cluster. */
+const v2Faqs = [
+  {
+    q: "What happens if you don't hit 10 booked appointments in 90 days?",
+    a: "We refund every dollar of the monthly retainer. The setup fee covers our build cost and stays. The retainer is fully refundable. Our revenue is genuinely on the line.",
+  },
+  {
+    q: "Do I need to sign a long-term contract?",
+    a: "No. The engagement is 90 days. After that we go month-to-month. You can leave any time and keep everything we built: ads, funnel, automations, patient data.",
+  },
+  {
+    q: "What if I already have a website, agency, or Google Ads account?",
+    a: "We can either rebuild from scratch or take over what you have. Either way, we audit it first and tell you the honest truth, including walking away if the existing setup is good enough.",
+  },
+  {
+    q: "Do I have to use your AI follow-up?",
+    a: "No. We audit your current follow-up speed first. If your team already responds within minutes, we skip the AI layer and the guarantee stays the same. If your team responds in hours, we layer it in so the booking math still works. You decide which configuration you want once we've seen the numbers.",
+  },
+  {
+    q: "What ad spend do I need on top of the retainer?",
+    a: "Most clinics need $1,500 to $3,000 per month in ad spend to hit the guarantee. We tell you the exact number for your specialty and geography before you sign.",
+  },
+  {
+    q: "Which clinic verticals do you work with?",
+    a: "Dental, aesthetics, hair transplant, cosmetic surgery, LASIK, dermatology, chiropractic, physiotherapy. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
+  },
+  {
+    q: "Can you guarantee 30 appointments instead of 10?",
+    a: "No. 10 is the floor of the guarantee. 30 is what we typically hit, but we don't promise what we can't refund-back. The guarantee is conservative on purpose.",
+  },
+];
+
 /**
  * Warm palette + serif-headline primary page.
  * Paper #FAF7F1 base, forest #1F6A4C primary, gold #A6822A accent.
  * Headlines: Source Serif 4. Body / UI: Manrope.
+ *
+ * v2-specific: clinic-resonant pain points + mirrored benefits + honest
+ * strategy-call framing (no false "no pitch" claim).
  */
+
+/* Pain points reframed to match the lived experience of $15k–$300k/mo
+   clinic owners. Each pain has a matching benefit in v2Benefits below. */
+const v2PainPoints = [
+  {
+    title: "Patient flow that depends on luck",
+    body:
+      "Walk-ins, word-of-mouth, referrals from existing patients. Some months look great. Others feel too quiet. You can't plan, hire, or invest because next month is a coin flip.",
+  },
+  {
+    title: "Inquiries that go cold before your team responds",
+    body:
+      "Most clinics respond to a new lead in 4 to 24 hours. Patients decide in 5 minutes. By the time your front desk calls back, they've booked with a competitor down the road.",
+  },
+  {
+    title: "Marketing built for businesses, not clinics",
+    body:
+      "Patients search differently. Compare differently. Decide differently. Generic agencies run your ads with the same playbook they use for plumbers and accountants.",
+  },
+  {
+    title: "Dashboards full of numbers that don't pay your rent",
+    body:
+      "Impressions. CTRs. 'Optimisation summaries'. If you can't see exactly which dollar produced which booked appointment, you're guessing. And guessing is what got you here.",
+  },
+];
+
+/* Mirrors v2PainPoints one-to-one. Same order. Same nouns where possible.
+   This is the strongest copywriting move — the brain registers
+   "yes that's my problem, and yes that's what I want instead". */
+const v2Benefits = [
+  {
+    title: "Patient flow that runs on math",
+    body:
+      "Ad spend in. Cost-per-booking out. Booked appointments fill the calendar — 10 to 30 every 90 days. You forecast, hire, and invest with the confidence the numbers give you.",
+  },
+  {
+    title: "Funnels built specifically for clinics",
+    body:
+      "Landing pages tuned to your specialty. Ad creative that matches how patients actually search. Compliance built in from day one. A system built for your category, not retrofitted.",
+  },
+  {
+    title: "Every inquiry contacted within 5 minutes, 24/7",
+    body:
+      "AI follow-up calls, texts, and qualifies every lead within 5 minutes. Day, night, weekend. By the time your front desk is in on Monday, the bookings are already on the calendar.",
+  },
+  {
+    title: "Numbers that tie directly to booked appointments",
+    body:
+      "One dashboard. One number that matters: cost per booked appointment. Refreshed weekly. You see exactly which dollar produced which booking. No 'optimisation' theatre.",
+  },
+];
 
 const accentForIndex = (i: number) => {
   const map = [
@@ -127,7 +240,7 @@ export default function Home() {
           </a>
           <nav className="hidden items-center gap-8 text-sm text-ink-500 md:flex">
             <a href="#process" className="transition hover:text-ink-900">Process</a>
-            <a href="#flow" className="transition hover:text-ink-900">System</a>
+            <a href="#shift" className="transition hover:text-ink-900">The shift</a>
             <a href="#what-you-get" className="transition hover:text-ink-900">What you get</a>
             <a href="#faq" className="transition hover:text-ink-900">FAQ</a>
           </nav>
@@ -203,13 +316,17 @@ export default function Home() {
             <div className="mx-auto max-w-2xl text-center">
               <Eyebrow>Your Current Reality</Eyebrow>
               <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
-                You&rsquo;re stuck in a cycle that&rsquo;s draining your time,
-                money, and energy.
+                The problem isn&rsquo;t effort.{" "}
+                <span className="italic text-forest-600">It&rsquo;s the system.</span>
               </h2>
+              <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
+                Your clinical work is excellent. Your reviews are good. Patients love you.
+                The gap is the system between Google search and a booked appointment.
+              </p>
             </div>
 
             <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {painPoints.map((p) => (
+              {v2PainPoints.map((p) => (
                 <div
                   key={p.title}
                   className="rounded-2xl border border-paper-3 bg-paper p-8 transition hover:border-ink-200 hover:shadow-sm"
@@ -237,7 +354,7 @@ export default function Home() {
             </div>
 
             <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {benefits.map((b) => (
+              {v2Benefits.map((b) => (
                 <div
                   key={b.title}
                   className="rounded-2xl border border-paper-3 bg-paper p-8 transition hover:border-forest-300 hover:shadow-sm"
@@ -269,7 +386,7 @@ export default function Home() {
             </div>
 
             <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-paper-3 bg-paper-3 md:grid-cols-2 lg:grid-cols-4">
-              {systems.map((s, i) => {
+              {v2Systems.map((s, i) => {
                 const c = accentForIndex(i);
                 return (
                   <div key={s.n} className="bg-paper p-8">
@@ -329,30 +446,79 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* SYSTEM FLOW CHART */}
-        <section id="flow" className="border-t border-paper-3 bg-paper-2 py-24">
+        {/* THE SHIFT — Before / After comparison */}
+        <section id="shift" className="border-t border-paper-3 bg-paper-2 py-24">
           <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <Eyebrow>How the system works</Eyebrow>
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow>The shift</Eyebrow>
               <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
-                Every lead. Every step. Every safety net.
+                Most clinics run on volatility.{" "}
+                <span className="italic text-forest-600">We replace it with math.</span>
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-500">
-                What happens between a Meta ad click and a booked patient on
-                your calendar. The whole pipeline, made visible.
+              <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
+                Five things change the moment the system is installed.
               </p>
             </div>
 
-            <div className="mt-14 rounded-2xl border border-paper-3 bg-paper p-4 shadow-sm sm:p-6 md:p-10">
-              <FlowChart
-                tone="light"
-                className="mx-auto block h-auto w-full max-w-[1100px]"
-              />
-            </div>
+            <div className="mx-auto mt-14 grid max-w-5xl gap-px overflow-hidden rounded-2xl border border-paper-3 bg-paper-3 md:grid-cols-2">
+              {/* WITHOUT */}
+              <div className="bg-paper p-8 md:p-10">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-rose-300/40 bg-rose-50 text-rose-500">
+                    <IconX className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-rose-500">
+                    Without NorthSend
+                  </h3>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Walk-ins and referrals (volatile, unpredictable flow)",
+                    "Front desk responds to leads in 4 to 24 hours",
+                    "Same ad playbook as plumbers and accountants",
+                    "Vanity dashboards (impressions, CTRs, 'optimisation summaries')",
+                    "Some months booked solid. Other months empty.",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-base leading-relaxed text-ink-600"
+                    >
+                      <span className="mt-2 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-ink-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-xs uppercase tracking-[0.18em] text-ink-400">
-              One flow. Every lead. Every clinic.
-            </p>
+              {/* WITH */}
+              <div className="bg-forest-50 p-8 md:p-10">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-forest-200 bg-paper text-forest-600">
+                    <IconCheck className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-forest-700">
+                    With NorthSend
+                  </h3>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Predictable ad + funnel + follow-up loop that fills the calendar",
+                    "Every lead contacted within 5 minutes, 24/7",
+                    "Funnels and creative tuned to your specialty",
+                    "One number on a weekly dashboard: cost per booked appointment",
+                    "10 to 30 booked appointments every 90 days, refund-backed",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-base leading-relaxed text-ink-700"
+                    >
+                      <IconCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-forest-600" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </Container>
         </section>
 
@@ -435,6 +601,120 @@ export default function Home() {
           </Container>
         </section>
 
+        {/* WHO THIS IS FOR — qualification filter */}
+        <section id="best-fit" className="border-t border-paper-3 py-24">
+          <Container>
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow>Best fit</Eyebrow>
+              <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
+                Who this is for. And who it isn&rsquo;t.
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
+                We don&rsquo;t take work we can&rsquo;t guarantee. If you fall on the right side of this list, book the call.
+              </p>
+            </div>
+
+            <div className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-2">
+              {/* Good fit */}
+              <div className="rounded-2xl border border-forest-200 bg-forest-50 p-8">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest-200 bg-paper text-forest-600">
+                  <IconCheck className="h-5 w-5" />
+                </div>
+                <h3 className="text-xl font-bold text-ink-900">Good fit</h3>
+                <ul className="mt-5 space-y-3.5">
+                  {[
+                    "$15k to $300k a month in clinic revenue",
+                    "Dental, aesthetics, physiotherapy, chiropractic, hair transplant, cosmetic surgery, LASIK, or dermatology",
+                    "Already running ads, or ready to invest $1,500 to $3,000 a month in spend",
+                    "Front desk that can answer inquiries within 5 minutes",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-base text-ink-700">
+                      <IconCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-forest-600" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Not a fit */}
+              <div className="rounded-2xl border border-rose-300/40 bg-rose-50/60 p-8">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-rose-300/40 bg-paper text-rose-500">
+                  <IconX className="h-5 w-5" />
+                </div>
+                <h3 className="text-xl font-bold text-ink-900">Not a fit</h3>
+                <ul className="mt-5 space-y-3.5">
+                  {[
+                    "Under $15k a month in revenue (you need cash flow to fund the ad spend)",
+                    "Want &lsquo;leads&rsquo; rather than booked appointments on the calendar",
+                    "Not willing to change anything about the current funnel or ads",
+                    "Expect results in under 14 days (first bookings hit in 14, guarantee at 90)",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-base text-ink-700">
+                      <IconX className="mt-0.5 h-5 w-5 flex-shrink-0 text-rose-500" />
+                      <span dangerouslySetInnerHTML={{ __html: item }} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* WHAT HAPPENS ON THE CALL — strategy-call preview */}
+        <section id="the-call" className="border-t border-paper-3 bg-paper-2 py-24">
+          <Container>
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow>The strategy call</Eyebrow>
+              <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
+                What happens in your{" "}
+                <span className="italic text-forest-600">free 30-minute call.</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
+                Three steps. Same every time. You leave with the numbers, the math,
+                and an honest answer.
+              </p>
+            </div>
+
+            <ol className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3">
+              {[
+                {
+                  n: "01",
+                  title: "We audit your numbers",
+                  body: "Current ad spend, cost-per-booking, conversion rate. We pull up your accounts on the call.",
+                },
+                {
+                  n: "02",
+                  title: "We build your 90-day math",
+                  body: "Exact number of bookings we can guarantee. Exact forecast for cost per booked appointment.",
+                },
+                {
+                  n: "03",
+                  title: "We tell you the honest answer",
+                  body: "Yes, we can hit the guarantee for your clinic. Or no, here&rsquo;s why we can&rsquo;t. No pitch either way.",
+                },
+              ].map((step) => (
+                <li
+                  key={step.n}
+                  className="rounded-2xl border border-paper-3 bg-paper p-8 transition hover:shadow-sm"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-forest-200 bg-forest-50 font-mono text-sm font-bold text-forest-700">
+                    {step.n}
+                  </span>
+                  <h3 className="mt-5 text-xl font-bold text-ink-900">{step.title}</h3>
+                  <p
+                    className="mt-3 text-base leading-relaxed text-ink-500"
+                    dangerouslySetInnerHTML={{ __html: step.body }}
+                  />
+                </li>
+              ))}
+            </ol>
+
+            <p className="mx-auto mt-10 max-w-xl text-center font-mono text-xs uppercase tracking-[0.18em] text-ink-400">
+              Audit first. We only pitch if it fits.
+            </p>
+          </Container>
+        </section>
+
         {/* CALENDAR / CTA */}
         <section id="calendar" className="border-t border-paper-3 py-24">
           <Container>
@@ -489,14 +769,14 @@ export default function Home() {
         <section id="faq" className="border-t border-paper-3 bg-paper-2 py-24">
           <Container className="max-w-3xl">
             <div className="text-center">
-              <Eyebrow>FAQ</Eyebrow>
+              <Eyebrow>Common questions</Eyebrow>
               <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
-                Frequently Asked Questions
+                Straight answers.
               </h2>
             </div>
 
             <div className="mt-12 divide-y divide-paper-3 overflow-hidden rounded-2xl border border-paper-3 bg-paper">
-              {faqs.map((faq, i) => (
+              {v2Faqs.map((faq, i) => (
                 <details key={i} className="group">
                   <summary className="flex cursor-pointer items-center justify-between gap-6 px-6 py-6 text-left transition hover:bg-paper-2">
                     <span className="text-lg font-semibold text-ink-900">{faq.q}</span>
@@ -524,6 +804,25 @@ export default function Home() {
               {closer.headlineLine2}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-paper-3">{closer.sub}</p>
+
+            {/* 3-step preview — reduces "what happens after I click" friction */}
+            <ol className="mx-auto mt-12 grid max-w-3xl gap-4 text-left sm:grid-cols-3">
+              {[
+                { n: "01", title: "Book the call", body: "Pick a time that works." },
+                { n: "02", title: "We audit the math", body: "Numbers reviewed live, on screen." },
+                { n: "03", title: "You get clarity", body: "Honest yes or no, up-front." },
+              ].map((s) => (
+                <li
+                  key={s.n}
+                  className="rounded-xl border border-forest-700 bg-forest-800/40 p-5"
+                >
+                  <span className="font-mono text-xs font-bold text-gold-300">{s.n}</span>
+                  <h3 className="mt-2 text-base font-bold text-paper">{s.title}</h3>
+                  <p className="mt-1 text-sm text-paper-3">{s.body}</p>
+                </li>
+              ))}
+            </ol>
+
             <div className="mt-10 flex justify-center">
               <a
                 href="#calendar"
