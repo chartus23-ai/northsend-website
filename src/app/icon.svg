@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <!--
+    NorthSend favicon — V2 Origami Arrow.
+    Tinted forest green to match the website palette and stay visible
+    on both light and dark browser tabs.
+    Geometry: apex (48,10), outer (16,80)/(80,80), notch (48,58).
+  -->
+  <polygon points="48,10 16,80 48,58" fill="#2E7D5A"/>
+  <polygon points="48,10 80,80 48,58" fill="#0B3A2A"/>
+</svg>

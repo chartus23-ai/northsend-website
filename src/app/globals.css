@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  /* ============================================
+     PRIMARY PALETTE — warm paper / forest / gold
+     Inspired by premium concierge-medical brands.
+     Adapted hues so we are not cloning competitors.
+     ============================================ */
+
+  /* Paper / page backgrounds (warm cream, not pure white) */
+  --color-paper: #FAF7F1;
+  --color-paper-2: #F2EDDF;
+  --color-paper-3: #E8E2D0;
+  --color-paper-4: #D9D1B8;
+
+  /* Ink / text (deep with subtle green undertone) */
+  --color-ink-50: #F1F0EC;
+  --color-ink-100: #DAD8D0;
+  --color-ink-200: #B4B5AE;
+  --color-ink-300: #8C9089;
+  --color-ink-400: #6A6F69;
+  --color-ink-500: #4A4F4A;
+  --color-ink-600: #333731;
+  --color-ink-700: #1F2722;
+  --color-ink-800: #131C16;
+  --color-ink-900: #0B130E;
+
+  /* Forest — primary brand */
+  --color-forest-50: #E9F2EC;
+  --color-forest-100: #C7DDD0;
+  --color-forest-200: #93BFA4;
+  --color-forest-300: #5BA079;
+  --color-forest-400: #348562;
+  --color-forest-500: #1F6A4C;
+  --color-forest-600: #134F39;
+  --color-forest-700: #0B3A2A;
+  --color-forest-800: #07291E;
+  --color-forest-900: #041910;
+
+  /* Gold — luxury accent (signature) */
+  --color-gold-50: #FAF1D7;
+  --color-gold-100: #F1E2B7;
+  --color-gold-200: #E8C97A;
+  --color-gold-300: #D9B254;
+  --color-gold-400: #C39A36;
+  --color-gold-500: #A6822A;
+  --color-gold-600: #856821;
+  --color-gold-700: #604B17;
+  --color-gold-800: #3E300F;
+
+  /* Clay — warm complement for sequenced diagrams */
+  --color-clay-100: #F0DCC9;
+  --color-clay-300: #D49B72;
+  --color-clay-400: #B97746;
+  --color-clay-500: #99572B;
+  --color-clay-700: #5E351A;
+
+  /* Teal — cool counterpoint for sequenced diagrams */
+  --color-teal-100: #CDE3E0;
+  --color-teal-300: #6FB5AE;
+  --color-teal-400: #3F8E88;
+  --color-teal-500: #2A6F69;
+  --color-teal-700: #143F3B;
+
+  /* Rose — destructive / pain points */
+  --color-rose-50: #F8E0D6;
+  --color-rose-300: #E6957A;
+  --color-rose-400: #C26449;
+  --color-rose-500: #9A4128;
+
+  /* ============================================
+     SEMANTIC + FONTS
+     ============================================ */
+  --color-bg: #FAF7F1;
+  --color-text: #0B130E;
+  --color-accent: #1F6A4C;
+  --color-accent-gold: #A6822A;
+
+  --font-sans: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html, body {
+  background: var(--color-paper);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Serif headline reset — optical sizing + tight tracking */
+.font-serif {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+  font-feature-settings: "ss01";
+}
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 80px; }
+
+/* Hero glow — soft forest with gold warm-point. background-image so it
+   layers over the bg colour rather than replacing it. */
+.glow-hero {
+  background-image:
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(31, 106, 76, 0.06), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(166, 130, 42, 0.05), transparent 60%);
+}
+
+/* Closer glow — strategic dark band; gold + forest highlights over forest-900 */
+.glow-closer {
+  background-image:
+    radial-gradient(ellipse 60% 70% at 50% 50%, rgba(195, 154, 54, 0.18), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 20% 50%, rgba(31, 106, 76, 0.25), transparent 65%);
+}
+
+/* Hairline divider */
+.hairline {
+  background: linear-gradient(to right, transparent, var(--color-paper-3), transparent);
+  height: 1px;
+}
+
+/* Subtle gold underline accent for inline highlights */
+.gold-underline {
+  background-image: linear-gradient(to right, var(--color-gold-300), var(--color-gold-300));
+  background-size: 100% 28%;
+  background-position: 0 88%;
+  background-repeat: no-repeat;
+}
+
+/* Accordion (native details) chevron + animation */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .accordion-chevron { transform: rotate(180deg); }
+.accordion-chevron { transition: transform 200ms ease; }
+
+/* Flow chart hooks */
+.flow-node { }
+.flow-node-alt { }
+
+/* Calendly inline widget — force iframe to fill the container.
+   Without this, some embeds initialise at the loading-skeleton height (~150px)
+   and never grow because the postMessage resize is intermittent. */
+.calendly-inline-widget,
+.calendly-inline-widget iframe {
+  width: 100% !important;
+}
+.calendly-inline-widget iframe {
+  min-height: 900px !important;
+  height: 100% !important;
+  border: 0 !important;
+}
