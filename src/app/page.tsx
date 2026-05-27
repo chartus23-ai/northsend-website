@@ -299,9 +299,6 @@ export default function Home() {
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="flex flex-col items-center gap-4">
                     <IconPlay className="h-20 w-20 text-forest-600 transition-transform group-hover:scale-110" />
-                    <p className="text-base font-medium uppercase tracking-[0.18em] text-ink-500">
-                      Charlie explains the 90-day system
-                    </p>
                     <p className="text-xs text-ink-400">VSL coming soon</p>
                   </div>
                 </div>

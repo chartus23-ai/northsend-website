@@ -19,12 +19,12 @@ const sourceSerif = Source_Serif_4({
 export const metadata: Metadata = {
   title: "NorthSend. Booked patients. Guaranteed in 90 days.",
   description:
-    "Done-for-you patient acquisition system for clinics. We guarantee 10 booked patient appointments in 90 days, or we refund every dollar of your retainer.",
+    "Done-for-you patient acquisition system for clinics. We guarantee 10 to 30 booked patient appointments in 90 days, or you don't pay.",
   metadataBase: new URL("https://northsend.io"),
   openGraph: {
     title: "NorthSend. Booked patients. Guaranteed in 90 days.",
     description:
-      "Done-for-you patient acquisition system for clinics. We guarantee 10 booked patient appointments in 90 days, or we refund every dollar of your retainer.",
+      "Done-for-you patient acquisition system for clinics. We guarantee 10 to 30 booked patient appointments in 90 days, or you don't pay.",
     type: "website",
     url: "https://northsend.io",
   },
