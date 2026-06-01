@@ -18,7 +18,7 @@ import {
 
 /* Hero marquee: clinic verticals we serve. Matches the FAQ list exactly.
    Order set by Charlie. Kept strictly clinic-only to protect the
-   "4+ years exclusively for clinics" positioning and the specialist
+   "5+ years exclusively for clinics" positioning and the specialist
    brand value. Broadening to spas / professional services was tried
    and reverted — dilutes the differentiation. */
 const v2Industries = [

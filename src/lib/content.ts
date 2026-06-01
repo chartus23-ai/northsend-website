@@ -184,7 +184,7 @@ export const about = {
   name: "Charlie Tay",
   initials: "CT",
   paragraphs: [
-    "Charlie started NorthSend after four years running ads exclusively for clinics, and watching too many practice owners get burned by agencies that delivered clicks instead of patients.",
+    "Charlie started NorthSend after five years running ads exclusively for clinics, and watching too many practice owners get burned by agencies that delivered clicks instead of patients.",
     "Every agency he competed against had the same playbook: sell a retainer, deliver a dashboard, and disappear when results didn't materialise. The clinic carried all the risk. The agency carried none.",
     "NorthSend exists for one reason: to put our revenue on the line alongside our clients'. If we don't deliver 10 to 30 booked patient appointments in 90 days, we refund every dollar of the retainer.",
   ],
@@ -197,7 +197,7 @@ export const hero = {
   headlineLine2Accent: "90 days.",
   sub: "Most agencies sell you clicks and call it growth. We guarantee 10 to 30 booked patient appointments in 90 days, or you don't pay.",
   trust: [
-    "4+ years in the clinic vertical",
+    "5+ years in the clinic vertical",
     "Refund-backed guarantee",
     "First bookings in 14 days",
   ],
