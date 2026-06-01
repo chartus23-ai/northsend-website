@@ -16,18 +16,20 @@ import {
   closer,
 } from "@/lib/content";
 
-/* Hero marquee: industries we serve. Order set by Charlie. Broader than
-   the clinic-only FAQ list deliberately — adjacent service businesses
-   (professional services, spa & wellness) are included to widen the
-   perceived industry footprint at the top of page. FAQ answer also
-   updated to match so there is no contradiction. */
+/* Hero marquee: clinic verticals we serve. Matches the FAQ list exactly.
+   Order set by Charlie. Kept strictly clinic-only to protect the
+   "4+ years exclusively for clinics" positioning and the specialist
+   brand value. Broadening to spas / professional services was tried
+   and reverted — dilutes the differentiation. */
 const v2Industries = [
   "Dental clinics",
   "Aesthetic clinics",
-  "Chiropractic",
   "Physiotherapy",
-  "Professional services",
-  "Spa & wellness",
+  "Chiropractic",
+  "Dermatology",
+  "LASIK",
+  "Hair transplant",
+  "Cosmetic surgery",
 ];
 
 /* v2-specific: AI follow-up repositioned as a conditional layer, not
@@ -85,8 +87,8 @@ const v2Faqs = [
     a: "Most clinics need $1,500 to $3,000 per month in ad spend to hit the guarantee. We tell you the exact number for your specialty and geography before you sign.",
   },
   {
-    q: "Which industries do you work with?",
-    a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery, professional services, spa and wellness. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
+    q: "Which clinic verticals do you work with?",
+    a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
   },
   {
     q: "Can you guarantee 30 appointments instead of 10?",
