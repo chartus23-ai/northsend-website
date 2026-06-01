@@ -5,9 +5,9 @@ import {
   IconX,
   IconArrowRight,
   IconChevronDown,
-  IconPlay,
 } from "@/components/icons";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
+import { WistiaEmbed } from "@/components/WistiaEmbed";
 import {
   process,
   deliverables,
@@ -309,16 +309,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* VSL placeholder */}
+            {/* VSL — Wistia embed (media x29jew2n0a) */}
             <div className="mx-auto mt-16 max-w-4xl">
-              <div className="group relative aspect-video overflow-hidden rounded-2xl border border-paper-3 bg-paper-2 shadow-[0_20px_60px_-20px_rgba(11,19,14,0.25)]">
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="flex flex-col items-center gap-4">
-                    <IconPlay className="h-20 w-20 text-forest-600 transition-transform group-hover:scale-110" />
-                    <p className="text-xs text-ink-400">VSL coming soon</p>
-                  </div>
-                </div>
-              </div>
+              <WistiaEmbed mediaId="x29jew2n0a" />
             </div>
           </Container>
         </section>
