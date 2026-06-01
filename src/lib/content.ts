@@ -70,7 +70,7 @@ export const systems: Step[] = [
   {
     n: "03",
     title: "AI follow-up system",
-    body: "n8n + AI automations that text, call, and re-engage every lead in under 5 minutes. Books the ready, nurtures the not-yet-ready.",
+    body: "AI automations that text, call, and re-engage every lead in under 5 minutes. Books the ready, nurtures the not-yet-ready.",
   },
   {
     n: "04",

@@ -37,7 +37,7 @@ const v2Systems = [
     n: "03",
     title: "AI follow-up layer",
     body:
-      "n8n + AI automations that text, call, and re-engage every lead in under 5 minutes. Layered in when your current follow-up speed can't hit the math. Books the ready, nurtures the not-yet-ready.",
+      "AI automations that text, call, and re-engage every lead in under 5 minutes. Layered in when your current follow-up speed can't hit the math. Books the ready, nurtures the not-yet-ready.",
   },
   {
     n: "04",
@@ -313,7 +313,8 @@ export default function Home() {
             <div className="mx-auto max-w-2xl text-center">
               <Eyebrow>Your Current Reality</Eyebrow>
               <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
-                The problem isn&rsquo;t effort.{" "}
+                The problem isn&rsquo;t effort.
+                <br />
                 <span className="italic text-forest-600">It&rsquo;s the system.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
