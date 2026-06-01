@@ -140,6 +140,29 @@ details[open] .accordion-chevron { transform: rotate(180deg); }
 .flow-node { }
 .flow-node-alt { }
 
+/* Industries marquee — seamless infinite horizontal scroll.
+   Track is duplicated 2x in JSX; -50% translate lands at the start of
+   the duplicate so the loop is invisible. Pauses on hover. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+.marquee-mask {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
 /* Calendly inline widget — force iframe to fill the container.
    Without this, some embeds initialise at the loading-skeleton height (~150px)
    and never grow because the postMessage resize is intermittent. */

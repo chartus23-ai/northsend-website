@@ -16,6 +16,20 @@ import {
   closer,
 } from "@/lib/content";
 
+/* Hero marquee: industries we serve. Order set by Charlie. Broader than
+   the clinic-only FAQ list deliberately — adjacent service businesses
+   (professional services, spa & wellness) are included to widen the
+   perceived industry footprint at the top of page. FAQ answer also
+   updated to match so there is no contradiction. */
+const v2Industries = [
+  "Dental clinics",
+  "Aesthetic clinics",
+  "Chiropractic",
+  "Physiotherapy",
+  "Professional services",
+  "Spa & wellness",
+];
+
 /* v2-specific: AI follow-up repositioned as a conditional layer, not
    a universal default. Card #3 body copy acknowledges the conditionality
    subtly — we still keep AI follow-up in the system narrative for
@@ -71,8 +85,8 @@ const v2Faqs = [
     a: "Most clinics need $1,500 to $3,000 per month in ad spend to hit the guarantee. We tell you the exact number for your specialty and geography before you sign.",
   },
   {
-    q: "Which clinic verticals do you work with?",
-    a: "Dental, aesthetics, hair transplant, cosmetic surgery, LASIK, dermatology, chiropractic, physiotherapy. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
+    q: "Which industries do you work with?",
+    a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery, professional services, spa and wellness. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
   },
   {
     q: "Can you guarantee 30 appointments instead of 10?",
@@ -302,6 +316,30 @@ export default function Home() {
                     <p className="text-xs text-ink-400">VSL coming soon</p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* INDUSTRIES MARQUEE */}
+        <section
+          aria-label="Industries we serve"
+          className="border-t border-paper-3 bg-paper py-10"
+        >
+          <Container>
+            <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-400">
+              Industries we serve
+            </p>
+            <div className="marquee-mask mt-6">
+              <div className="marquee-track flex w-max gap-3">
+                {[...v2Industries, ...v2Industries].map((label, i) => (
+                  <span
+                    key={`${label}-${i}`}
+                    className="inline-flex shrink-0 items-center rounded-full border border-paper-3 bg-paper-2 px-5 py-2 text-sm font-medium text-ink-600"
+                  >
+                    {label}
+                  </span>
+                ))}
               </div>
             </div>
           </Container>

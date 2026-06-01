@@ -171,8 +171,8 @@ export const faqs: Array<{ q: string; a: string }> = [
     a: "Most clinics need $1,500 to $3,000 per month in ad spend to hit the guarantee. We tell you the exact number for your specialty and geography before you sign.",
   },
   {
-    q: "Which clinic verticals do you work with?",
-    a: "Dental, aesthetics, hair transplant, cosmetic surgery, LASIK, dermatology, chiropractic, physiotherapy. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
+    q: "Which industries do you work with?",
+    a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery, professional services, spa and wellness. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
   },
   {
     q: "Can you guarantee 30 appointments instead of 10?",
