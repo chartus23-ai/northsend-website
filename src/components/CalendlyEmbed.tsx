@@ -19,7 +19,7 @@ import { useEffect } from "react";
  *   hide_gdpr_banner=1        — quieter widget.
  */
 
-const CALENDLY_URL = "https://calendly.com/charlie-northsend/30min";
+const CALENDLY_URL = "https://calendly.com/charlie-northsend/20min";
 
 const PARAMS = new URLSearchParams({
   // Show the event headline + description inside the widget so prospects

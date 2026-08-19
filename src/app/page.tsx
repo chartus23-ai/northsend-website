@@ -698,7 +698,7 @@ export default function Home() {
               <Eyebrow>The strategy call</Eyebrow>
               <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
                 What happens in your{" "}
-                <span className="italic text-forest-600">free 30-minute call.</span>
+                <span className="italic text-forest-600">free 20-minute call.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
                 Three steps. Same every time. You leave with the numbers, the math,
@@ -755,7 +755,7 @@ export default function Home() {
                 your next 10 booked patients?
               </h2>
               <p className="mt-6 text-xl text-ink-500">
-                Book your free 30-minute strategy call. No pressure, just honest
+                Book your free 20-minute strategy call. No pressure, just honest
                 math. We&rsquo;ll tell you up-front if we can hit the guarantee
                 for your practice.
               </p>

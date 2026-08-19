@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         // cards, email signatures, and ad UTMs so you can swap providers later
         // without breaking links.
         source: "/book",
-        destination: "https://calendly.com/charlie-northsend/30min",
+        destination: "https://calendly.com/charlie-northsend/20min",
         permanent: false,
       },
     ];
