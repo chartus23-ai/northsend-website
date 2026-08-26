@@ -8,29 +8,15 @@ import {
 } from "@/components/icons";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { WistiaEmbed } from "@/components/WistiaEmbed";
+import { CaseStudyCarousel } from "@/components/CaseStudies";
 import {
   process,
   deliverables,
   about,
   hero,
   closer,
+  clinicLogos,
 } from "@/lib/content";
-
-/* Hero marquee: clinic verticals we serve. Matches the FAQ list exactly.
-   Order set by Charlie. Kept strictly clinic-only to protect the
-   "5+ years exclusively for clinics" positioning and the specialist
-   brand value. Broadening to spas / professional services was tried
-   and reverted — dilutes the differentiation. */
-const v2Industries = [
-  "Dental clinics",
-  "Aesthetic clinics",
-  "Physiotherapy",
-  "Chiropractic",
-  "Dermatology",
-  "LASIK",
-  "Hair transplant",
-  "Cosmetic surgery",
-];
 
 /* v2-specific: AI follow-up repositioned as a conditional layer, not
    a universal default. Card #3 body copy acknowledges the conditionality
@@ -67,7 +53,7 @@ const v2Systems = [
    at position #4, after the "what if I already have X" objection cluster. */
 const v2Faqs = [
   {
-    q: "What happens if you don't hit 10 booked appointments in 90 days?",
+    q: "What happens if you don't hit 30 booked appointments in 90 days?",
     a: "We refund every dollar of the monthly retainer. The setup fee covers our build cost and stays. The retainer is fully refundable. Our revenue is genuinely on the line.",
   },
   {
@@ -89,10 +75,6 @@ const v2Faqs = [
   {
     q: "Which clinic verticals do you work with?",
     a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
-  },
-  {
-    q: "Can you guarantee 30 appointments instead of 10?",
-    a: "No. 10 is the floor of the guarantee. 30 is what we typically hit, but we don't promise what we can't refund-back. The guarantee is conservative on purpose.",
   },
 ];
 
@@ -137,7 +119,7 @@ const v2Benefits = [
   {
     title: "Patient flow that runs on math",
     body:
-      "Ad spend in. Cost-per-booking out. Booked appointments fill the calendar — 10 to 30 every 90 days. You forecast, hire, and invest with the confidence the numbers give you.",
+      "Ad spend in. Cost-per-booking out. Booked appointments fill the calendar — 30 to 50 every 90 days. You forecast, hire, and invest with the confidence the numbers give you.",
   },
   {
     title: "Funnels built specifically for clinics",
@@ -256,8 +238,9 @@ export default function Home() {
           </a>
           <nav className="hidden items-center gap-8 text-sm text-ink-500 md:flex">
             <a href="#process" className="transition hover:text-ink-900">Process</a>
+            <a href="#results" className="transition hover:text-ink-900">Results</a>
             <a href="#shift" className="transition hover:text-ink-900">The shift</a>
-            <a href="#what-you-get" className="transition hover:text-ink-900">What you get</a>
+            <a href="/deliverables" className="transition hover:text-ink-900">Deliverables</a>
             <a href="#faq" className="transition hover:text-ink-900">FAQ</a>
           </nav>
           {/* Nav-only CTA — compact on mobile, full size on desktop. Label shortens on mobile so it stops crowding the logo. */}
@@ -316,24 +299,37 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* INDUSTRIES MARQUEE */}
+        {/* CLINIC LOGO CAROUSEL — real logos of the accounts behind the case
+            studies. Uniform monochrome (ink silhouette, brightness-0) at low
+            opacity so the very different logos read as one cohesive trust strip,
+            and so the two white-on-transparent logos (ellim, denscare) stay
+            visible on the cream background. Seamless loop: each item carries its
+            own right margin (not a flex gap), so translateX(-50%) lands exactly
+            on the duplicate with no half-gap jump. */}
         <section
-          aria-label="Industries we serve"
-          className="border-t border-paper-3 bg-paper py-10"
+          aria-label="Clinics we have worked with"
+          className="border-t border-paper-3 bg-paper py-12"
         >
           <Container>
             <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-400">
-              Industries we serve
+              Clinics we&rsquo;ve worked with
             </p>
-            <div className="marquee-mask mt-6">
-              <div className="marquee-track flex w-max gap-3">
-                {[...v2Industries, ...v2Industries].map((label, i) => (
-                  <span
-                    key={`${label}-${i}`}
-                    className="inline-flex shrink-0 items-center rounded-full border border-paper-3 bg-paper-2 px-5 py-2 text-sm font-medium text-ink-600"
+            <div className="marquee-mask mt-8">
+              <div className="marquee-track flex w-max">
+                {[...clinicLogos, ...clinicLogos].map((logo, i) => (
+                  <div
+                    key={i}
+                    className="mr-16 flex h-14 shrink-0 items-center justify-center"
                   >
-                    {label}
-                  </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      className={`w-auto object-contain opacity-50 brightness-0 transition-opacity duration-200 hover:opacity-80 ${
+                        logo.imgClass ?? "max-h-9 max-w-[175px]"
+                      }`}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -477,6 +473,34 @@ export default function Home() {
           </Container>
         </section>
 
+        {/* RESULTS / CASE STUDIES — real Google Ads accounts.
+            Placed after Process to match nav order. Soft forest tint sets it
+            apart from the paper / paper-2 rhythm as the dedicated proof band.
+            Card accents follow the CLAUDE.md colour rotation. */}
+        <section id="results" className="border-t border-paper-3 bg-forest-50/40 py-24">
+          <Container>
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow tone="green">Results</Eyebrow>
+              <h2 className="font-serif mt-6 text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
+                Real revenue.{" "}
+                <span className="italic text-forest-600">Real clinics.</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-lg text-ink-500">
+                Numbers you can verify. Pulled straight from the client
+                dashboards.
+              </p>
+            </div>
+
+            {/* Outcome-led cards in a horizontal scroll, each with a real-data
+                proof panel. See components/CaseStudies.tsx. */}
+            <CaseStudyCarousel />
+
+            <div className="mt-12 flex justify-center">
+              <PrimaryCTA>Get numbers like these for your clinic</PrimaryCTA>
+            </div>
+          </Container>
+        </section>
+
         {/* THE SHIFT — Before / After comparison */}
         <section id="shift" className="border-t border-paper-3 bg-paper-2 py-24">
           <Container>
@@ -537,7 +561,7 @@ export default function Home() {
                     "Every lead contacted within 5 minutes, 24/7",
                     "Funnels and creative tuned to your specialty",
                     "One number on a weekly dashboard: cost per booked appointment",
-                    "10 to 30 booked appointments every 90 days, refund-backed",
+                    "30 to 50 booked appointments every 90 days, refund-backed",
                   ].map((item) => (
                     <li
                       key={item}
@@ -752,7 +776,7 @@ export default function Home() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="font-serif text-4xl font-semibold leading-tight tracking-tight text-ink-900 md:text-5xl">
                 Ready to <span className="italic text-forest-600">guarantee</span>{" "}
-                your next 10 booked patients?
+                your next 30 booked patients?
               </h2>
               <p className="mt-6 text-xl text-ink-500">
                 Book your free 20-minute strategy call. No pressure, just honest

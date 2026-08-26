@@ -40,7 +40,7 @@ export const painPoints: Array<{ title: string; body: string }> = [
 export const benefits: Array<{ title: string; body: string }> = [
   {
     title: "Predictable booked appointments",
-    body: "10 to 30 booked appointments on your calendar every 90 days. You hire, invest, and plan with confidence because the calendar fills itself.",
+    body: "30 to 50 booked appointments on your calendar every 90 days. You hire, invest, and plan with confidence because the calendar fills itself.",
   },
   {
     title: "Sub-5-minute response on every lead",
@@ -52,7 +52,7 @@ export const benefits: Array<{ title: string; body: string }> = [
   },
   {
     title: "Skin in the game, every month",
-    body: "If you don't get 10 booked appointments in 90 days, we refund the monthly retainer. Our revenue is on the line alongside yours.",
+    body: "If you don't get 30 booked appointments in 90 days, we refund the monthly retainer. Our revenue is on the line alongside yours.",
   },
 ];
 
@@ -116,12 +116,12 @@ export const deliverables: Array<{ category: string; items: string[] }> = [
     ],
   },
   {
-    category: "Ads",
+    category: "Google Ads",
     items: [
-      "Meta + Google account setup",
-      "Geo-targeted campaign build",
-      "Weekly creative refresh",
-      "Continuous bid + budget optimisation",
+      "Google Ads account setup + structure",
+      "Geo-targeted Search + Performance Max build",
+      "Conversion tracking + GA4 setup",
+      "Weekly ad copy refresh + bid optimisation",
     ],
   },
   {
@@ -155,7 +155,7 @@ export const deliverables: Array<{ category: string; items: string[] }> = [
 
 export const faqs: Array<{ q: string; a: string }> = [
   {
-    q: "What happens if you don't hit 10 booked appointments in 90 days?",
+    q: "What happens if you don't hit 30 booked appointments in 90 days?",
     a: "We refund every dollar of the monthly retainer. The setup fee covers our build cost and stays. The retainer is fully refundable. Our revenue is genuinely on the line.",
   },
   {
@@ -174,10 +174,6 @@ export const faqs: Array<{ q: string; a: string }> = [
     q: "Which clinic verticals do you work with?",
     a: "Dental, aesthetics, physiotherapy, chiropractic, dermatology, LASIK, hair transplant, cosmetic surgery. If you're outside these, we'll tell you up-front. We don't take work we can't guarantee.",
   },
-  {
-    q: "Can you guarantee 30 appointments instead of 10?",
-    a: "No. 10 is the floor of the guarantee. 30 is what we typically hit, but we don't promise what we can't refund-back. The guarantee is conservative on purpose.",
-  },
 ];
 
 export const about = {
@@ -186,16 +182,174 @@ export const about = {
   paragraphs: [
     "Charlie started NorthSend after five years running ads exclusively for clinics, and watching too many practice owners get burned by agencies that delivered clicks instead of patients.",
     "Every agency he competed against had the same playbook: sell a retainer, deliver a dashboard, and disappear when results didn't materialise. The clinic carried all the risk. The agency carried none.",
-    "NorthSend exists for one reason: to put our revenue on the line alongside our clients'. If we don't deliver 10 to 30 booked patient appointments in 90 days, we refund every dollar of the retainer.",
+    "NorthSend exists for one reason: to put our revenue on the line alongside our clients'. If we don't deliver 30 to 50 booked patient appointments in 90 days, we refund every dollar of the retainer.",
   ],
 };
+
+/**
+ * Clinic logo carousel (below hero). Real logo files for the accounts behind
+ * the case studies, pulled from each clinic's own site into /public/logos/.
+ * Rendered as uniform monochrome (ink silhouette) in a rotating marquee so the
+ * wildly different logos read as one cohesive trust strip. This also fixes the
+ * two logos (ellim, denscare) that ship as white-on-transparent for dark headers
+ * and would otherwise be invisible on the cream background.
+ * `imgClass` overrides the default sizing per logo (e.g. the square ellim mark).
+ */
+export type ClinicLogo = { src: string; alt: string; imgClass?: string };
+
+export const clinicLogos: ClinicLogo[] = [
+  { src: "/logos/aklinik.png", alt: "A Klinik" },
+  { src: "/logos/denscare.svg", alt: "Dens Care" },
+  { src: "/logos/azurose.png", alt: "Klinik Azurose" },
+  { src: "/logos/dentalane.png", alt: "Klinik Pergigian Dentalane" },
+  { src: "/logos/medicura.png", alt: "Klinik Medicura" },
+  { src: "/logos/regenesis.png", alt: "Regenesis Physiotherapy" },
+  {
+    src: "/logos/ellim.png",
+    alt: "E.L. Lim Dental Surgery",
+    imgClass: "max-h-14 max-w-[72px]",
+  },
+];
+
+/**
+ * Case studies. Real clinic accounts from Charlie's 5+ years running ads
+ * for clinics. Displayed ANONYMISED (clinic type + generic descriptor, no name,
+ * no region). Rendered by <CaseStudyCarousel /> as outcome-led cards, each with
+ * a "proof panel" mini-dashboard built from real Google Ads data.
+ *
+ * CURRENCY: AUD. Source data is MYR; converted MYR -> USD @4.07 -> AUD @1.4406
+ * (i.e. MYR x 0.35396), rate as of 2026-07-10.
+ *
+ * What is REAL (from Google Ads via Windsor, trailing 12 months):
+ *   - `leadsTotal`, `spend`, cost-per-lead, and the `monthly` lead series.
+ * What is ESTIMATED:
+ *   - booked appointments = 20% of leads (below the 25%+ benchmark, on purpose)
+ *   - revenue = booked x conservative first-case value per vertical, in AUD
+ *     (Dental A$432, Implants A$1,729, Physio/Aesthetic A$360, Medical A$115)
+ *
+ * A KLINIK (card 1) = the AESTHETIC / med-spa side only. Charlie asked for "AKS
+ * campaigns / aesthetic only". Taken as ALL aesthetic campaigns (AKS/Signature +
+ * HIFU, Ultherapy, Acne, Pico, Slimming, Hair Loss, Pigmentation, Ellanse),
+ * EXCLUDING the medical AKM / knee / GP campaigns. The literally-"AKS"-named
+ * campaigns alone only launched ~Feb 2026 (1,166 leads, mostly-empty trend), so
+ * the broader aesthetic set is used for a real 12-month story.
+ *
+ * `hero` is the single most impactful honest number for that clinic.
+ * `monthly` is 12 months of real leads (Jul 2025 -> Jun 2026) for the trend bars.
+ * Ordered by lead volume, descending.
+ */
+export type CaseStudyStat = { value: string; label: string; est?: boolean };
+
+export type CaseStudy = {
+  sector: string;
+  hero: { value: string; unit: string; est?: boolean };
+  context: string;
+  stats: CaseStudyStat[];
+  leadsTotal: string;
+  spend: string;
+  monthly: number[];
+};
+
+export const caseStudies: CaseStudy[] = [
+  {
+    sector: "Aesthetic · med spa",
+    hero: { value: "6,469", unit: "leads" },
+    context:
+      "6,469 aesthetic leads in twelve months across skin, HIFU, Ultherapy and slimming treatments.",
+    stats: [
+      { value: "1,294", label: "Booked appts" },
+      { value: "A$38,820", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "6,469",
+    spend: "A$196,969",
+    monthly: [395, 371, 367, 422, 638, 948, 932, 727, 968, 225, 223, 254],
+  },
+  {
+    sector: "Dental · general & braces",
+    hero: { value: "1,279", unit: "booked appointments" },
+    context:
+      "6,397 real leads in twelve months, an estimated 1,279 booked appointments.",
+    stats: [
+      { value: "6,397", label: "Leads" },
+      { value: "A$46,044", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "6,397",
+    spend: "A$43,919",
+    monthly: [528, 468, 518, 550, 546, 680, 534, 513, 541, 492, 513, 514],
+  },
+  {
+    sector: "Medical · primary care",
+    hero: { value: "1,078", unit: "booked appointments" },
+    context:
+      "5,389 leads in twelve months, an estimated 1,078 booked appointments.",
+    stats: [
+      { value: "5,389", label: "Leads" },
+      { value: "A$10,331", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "5,389",
+    spend: "A$20,602",
+    monthly: [492, 307, 351, 526, 462, 459, 467, 410, 413, 353, 613, 537],
+  },
+  {
+    sector: "Dental · general & cosmetic",
+    hero: { value: "577", unit: "booked appointments" },
+    context:
+      "2,887 leads over twelve months, an estimated 577 booked appointments.",
+    stats: [
+      { value: "2,887", label: "Leads" },
+      { value: "A$20,772", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "2,887",
+    spend: "A$14,246",
+    monthly: [210, 146, 150, 102, 150, 177, 190, 241, 246, 758, 323, 194],
+  },
+  {
+    sector: "Medical · family clinic",
+    hero: { value: "503", unit: "booked appointments" },
+    context:
+      "2,515 leads for a neighbourhood family clinic, steady month after month.",
+    stats: [
+      { value: "2,515", label: "Leads" },
+      { value: "A$4,820", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "2,515",
+    spend: "A$14,245",
+    monthly: [137, 107, 227, 218, 201, 245, 257, 257, 220, 200, 206, 240],
+  },
+  {
+    sector: "Physio & chiro · sports rehab",
+    hero: { value: "339", unit: "booked appointments" },
+    context:
+      "1,697 leads for a sports physiotherapy and chiro practice.",
+    stats: [
+      { value: "1,697", label: "Leads" },
+      { value: "A$10,170", label: "Revenue / mo", est: true },
+    ],
+    leadsTotal: "1,697",
+    spend: "A$17,682",
+    monthly: [92, 160, 192, 177, 161, 184, 146, 116, 148, 132, 113, 77],
+  },
+  {
+    sector: "Dental · implants only",
+    hero: { value: "A$15,561", unit: "monthly revenue" },
+    context:
+      "An implants-only practice. 539 high-intent leads at premium case value per patient.",
+    stats: [
+      { value: "539", label: "Leads" },
+      { value: "108", label: "Booked appts" },
+    ],
+    leadsTotal: "539",
+    spend: "A$11,660",
+    monthly: [24, 36, 51, 50, 55, 54, 62, 39, 43, 46, 56, 24],
+  },
+];
 
 export const hero = {
   eyebrow: "Patient acquisition for clinics",
   headlineLine1: "Booked patients.",
   headlineLine2Pre: "Guaranteed in ",
   headlineLine2Accent: "90 days.",
-  sub: "Most agencies sell you clicks and call it growth. We guarantee 10 to 30 booked patient appointments in 90 days, or you don't pay.",
+  sub: "Most agencies sell you clicks and call it growth. We guarantee 30 to 50 booked patient appointments in 90 days, or you don't pay.",
   trust: [
     "5+ years in the clinic vertical",
     "Refund-backed guarantee",
