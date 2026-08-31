@@ -96,7 +96,7 @@ export const process: ProcessStep[] = [
     n: "03",
     title: "First booked appointments",
     when: "Week 4",
-    body: "Campaigns go live. AI follow-up kicks in. First booked appointments hit your calendar within 14 days of launch.",
+    body: "Campaigns go live. AI follow-up kicks in. First booked appointments hit your calendar within 10 days of launch.",
   },
   {
     n: "04",
@@ -353,7 +353,7 @@ export const hero = {
   trust: [
     "5+ years in the clinic vertical",
     "Refund-backed guarantee",
-    "First bookings in 14 days",
+    "First bookings in 10 days",
   ],
   primaryCta: "Book your strategy call",
   secondaryCta: "See how it works",
