@@ -702,7 +702,7 @@ export default function Home() {
                     "Under $15k a month in revenue (you need cash flow to fund the ad spend)",
                     "Want &lsquo;leads&rsquo; rather than booked appointments on the calendar",
                     "Not willing to change anything about the current funnel or ads",
-                    "Expect results in under 14 days (first bookings hit in 14, guarantee at 90)",
+                    "Expect results in under 10 days (first booking hit 10 days after signing, guarantee at 90)",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-base text-ink-700">
                       <IconX className="mt-0.5 h-5 w-5 flex-shrink-0 text-rose-500" />
