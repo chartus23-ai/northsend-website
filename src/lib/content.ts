@@ -200,6 +200,13 @@ export const about = {
  * background would render as a solid black box, so both were converted to
  * transparent (alpha from luminance, ink colour recovered) and trimmed before
  * being committed here. Re-do that if either file is ever refreshed.
+ *
+ * Because that trim leaves the artwork flush to the file edge (unlike the other
+ * logos, which ship with their own whitespace), these two are capped BELOW the
+ * 56px row height so they keep a few px of air inside the `overflow: hidden`
+ * mask. At max-h-14 the physioroom frame's bottom rule landed on the row's last
+ * pixel and read as clipped. The circle gets 48px to the square frame's 44px:
+ * a circle needs to be slightly larger to carry the same optical weight.
  */
 export type ClinicLogo = { src: string; alt: string; imgClass?: string };
 
@@ -209,14 +216,14 @@ export const clinicLogos: ClinicLogo[] = [
   {
     src: "/logos/physioroom.png",
     alt: "The Physio Room",
-    imgClass: "max-h-14 max-w-[72px]",
+    imgClass: "max-h-11 max-w-[72px]",
   },
   { src: "/logos/azurose.png", alt: "Klinik Azurose" },
   { src: "/logos/dentalane.png", alt: "Klinik Pergigian Dentalane" },
   {
     src: "/logos/mordialloc.png",
     alt: "Mordialloc Chiropractic",
-    imgClass: "max-h-14 max-w-[72px]",
+    imgClass: "max-h-12 max-w-[72px]",
   },
   { src: "/logos/medicura.png", alt: "Klinik Medicura" },
   { src: "/logos/regenesis.png", alt: "Regenesis Physiotherapy" },
