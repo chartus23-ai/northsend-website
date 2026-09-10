@@ -194,14 +194,30 @@ export const about = {
  * two logos (ellim, denscare) that ship as white-on-transparent for dark headers
  * and would otherwise be invisible on the cream background.
  * `imgClass` overrides the default sizing per logo (e.g. the square ellim mark).
+ *
+ * NOTE: physioroom and mordialloc only exist on their own sites as opaque
+ * white-background PNGs. Because the marquee applies `brightness-0`, a white
+ * background would render as a solid black box, so both were converted to
+ * transparent (alpha from luminance, ink colour recovered) and trimmed before
+ * being committed here. Re-do that if either file is ever refreshed.
  */
 export type ClinicLogo = { src: string; alt: string; imgClass?: string };
 
 export const clinicLogos: ClinicLogo[] = [
   { src: "/logos/aklinik.png", alt: "A Klinik" },
   { src: "/logos/denscare.svg", alt: "Dens Care" },
+  {
+    src: "/logos/physioroom.png",
+    alt: "The Physio Room",
+    imgClass: "max-h-14 max-w-[72px]",
+  },
   { src: "/logos/azurose.png", alt: "Klinik Azurose" },
   { src: "/logos/dentalane.png", alt: "Klinik Pergigian Dentalane" },
+  {
+    src: "/logos/mordialloc.png",
+    alt: "Mordialloc Chiropractic",
+    imgClass: "max-h-14 max-w-[72px]",
+  },
   { src: "/logos/medicura.png", alt: "Klinik Medicura" },
   { src: "/logos/regenesis.png", alt: "Regenesis Physiotherapy" },
   {
