@@ -201,6 +201,14 @@ export const about = {
  * transparent (alpha from luminance, ink colour recovered) and trimmed before
  * being committed here. Re-do that if either file is ever refreshed.
  *
+ * NOTE: smilecare ships as a KNOCKOUT logo, white art inside opaque colour
+ * blocks, so brightness-0 would have flattened it into a solid slab with the
+ * wordmark invisible. It was rebuilt as dark-on-transparent: the knockout art
+ * became the ink (alpha ramped off each block's own ground luminance, which
+ * differ, and the seam columns between the blocks dropped so their light
+ * anti-aliasing does not read as a stray vertical rule), with the already-dark
+ * tagline band passed through untouched. They publish no other logo file.
+ *
  * Because that trim leaves the artwork flush to the file edge (unlike the other
  * logos, which ship with their own whitespace), these two are capped BELOW the
  * 56px row height so they keep a few px of air inside the `overflow: hidden`
@@ -226,6 +234,7 @@ export const clinicLogos: ClinicLogo[] = [
     imgClass: "max-h-12 max-w-[72px]",
   },
   { src: "/logos/medicura.png", alt: "Klinik Medicura" },
+  { src: "/logos/smilecare.png", alt: "Smile Care Cosmetic Centre" },
   { src: "/logos/regenesis.png", alt: "Regenesis Physiotherapy" },
   {
     src: "/logos/ellim.png",
